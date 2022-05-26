@@ -22,19 +22,16 @@ public final class Launcher {
     private static final Logger logger = LoggerFactory.getLogger(Launcher.class);
 
     public static void main(String[] args) {
-        try (Server server = launch(8080, 8443)) {
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                server.stop().join();
-                logger.info("Server has been stopped.");
-            }));
+        Server server = launch(8080, 8443);
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            server.stop().join();
+            logger.info("Server has been stopped.");
+        }));
 
-            server.start().join();
+        server.start().join();
 
-            logger.info("Server has been started. Serving DocService at http://127.0.0.1:{}/docs",
-                    server.activeLocalPort());
-        } catch (RuntimeException ignored) {
-
-        }
+        logger.info("Server has been started. Serving DocService at http://127.0.0.1:{}/docs",
+                server.activeLocalPort());
     }
 
     private static Server launch(int httpPort, int httpsPort) {
