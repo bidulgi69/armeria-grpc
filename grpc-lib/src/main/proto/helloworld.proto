@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "kr.dove.lib";
+option java_outer_classname = "HelloWorldProto";
+
+service Greeting {
+  rpc sayHello (HelloRequest) returns (HelloReply);
+}
+
+message HelloRequest {
+  string name = 1;
+  int32 age = 2;
+
+  enum Asia {
+    Korea = 0;
+    Japanese = 1;
+    Taiwan = 2;
+    Mongolia = 3;
+    China = 4;
+  }
+  Asia asia = 3;
+}
+
+message HelloReply {
+  string message = 1;
+}

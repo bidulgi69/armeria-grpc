@@ -1,0 +1,59 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    ext {
+        grpcVersion = '1.46.0'
+        protobufVersion = '3.20.1'
+        protobufGradlePluginVersion = '0.8.18'
+        armeriaVersion = "1.16.0"
+        nettyVersion = "4.1.75.Final"
+    }
+}
+
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.google.protobuf' version "${protobufGradlePluginVersion}"
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'    //  It is required to recognize the /src/generated directory where the proto class is created
+    apply plugin: 'io.spring.dependency-management'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(11)
+        }
+    }
+
+    compileJava {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+        options.encoding = 'UTF-8'
+    }
+
+    compileJava.options*.compilerArgs = [
+            '-Xlint:all', '-Xlint:-processing'
+    ]
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+allprojects { project ->
+    buildscript {
+        dependencyManagement {
+            imports {
+                mavenBom "com.google.protobuf:protobuf-bom:${protobufVersion}"
+                mavenBom "io.grpc:grpc-bom:${grpcVersion}"
+                mavenBom "org.junit:junit-bom:5.8.2"
+                mavenBom "io.netty:netty-bom:${nettyVersion}"
+                mavenBom "com.linecorp.armeria:armeria-bom:${armeriaVersion}"
+            }
+        }
+    }
+}

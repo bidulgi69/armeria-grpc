@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    implementation project(":grpc-lib")
+    implementation 'com.linecorp.armeria:armeria'
+    implementation 'com.linecorp.armeria:armeria-grpc'
+    implementation 'io.projectreactor:reactor-core:3.4.18'
+    compileOnly 'javax.annotation:javax.annotation-api:1.3.2'
+    runtimeOnly 'org.slf4j:slf4j-simple:1.7.36'
+
+    testImplementation 'com.linecorp.armeria:armeria-junit5'
+    testImplementation 'javax.annotation:javax.annotation-api:1.3.2'
+    testImplementation 'net.javacrumbs.json-unit:json-unit-fluent:2.35.0'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
+    testImplementation 'org.awaitility:awaitility:4.2.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testImplementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
+}

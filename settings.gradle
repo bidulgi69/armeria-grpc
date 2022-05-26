@@ -1,0 +1,5 @@
+rootProject.name = 'armeria-grpc'
+include 'grpc-lib'
+include 'armeria-server'
+include 'spring-armeria-server'
+
