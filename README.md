@@ -1,5 +1,5 @@
 # armeria-grpc
-A simple gRPC &amp; REST communication example with <a href="https://github.com/line/armeria">Armeria</a>
+A simple gRPC &amp; REST service example with <a href="https://github.com/line/armeria">Armeria</a>
 
 ## Usage 
 1. Build `.proto` file first.
